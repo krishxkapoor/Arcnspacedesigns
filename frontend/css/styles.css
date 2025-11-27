@@ -1,0 +1,104 @@
+/* Custom styles matching React version */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(215, 30%, 15%);
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(215, 30%, 25%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(215, 30%, 35%);
+}
+
+/* Custom shadow */
+.shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Active nav link */
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 3px solid hsl(215, 70%, 50%);
+}
+
+/* Hover effects */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #valuation-report-container,
+    #valuation-report-container * {
+        visibility: visible;
+    }
+
+    #valuation-report-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Ensure inputs look like text when printing */
+    input,
+    textarea,
+    select {
+        border: none !important;
+        background: transparent !important;
+        resize: none;
+        padding: 0;
+        margin: 0;
+        width: auto;
+        font-family: inherit;
+        font-size: inherit;
+        color: black !important;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    /* Hide placeholders on print */
+    ::placeholder {
+        color: transparent;
+    }
+}
