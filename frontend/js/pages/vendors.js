@@ -67,27 +67,6 @@ async function loadVendors(container) {
               <option value="hardware">Hardware</option>
               <option value="other">Other</option>
             </select>
-            <select id="vendors-filter-month" class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none" onchange="renderVendors()">
-              <option value="">All Months</option>
-              <option value="0">January</option>
-              <option value="1">February</option>
-              <option value="2">March</option>
-              <option value="3">April</option>
-              <option value="4">May</option>
-              <option value="5">June</option>
-              <option value="6">July</option>
-              <option value="7">August</option>
-              <option value="8">September</option>
-              <option value="9">October</option>
-              <option value="10">November</option>
-              <option value="11">December</option>
-            </select>
-            <select id="vendors-filter-year" class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none" onchange="renderVendors()">
-              <option value="">All Years</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-            </select>
           </div>
         </div>
         <div id="vendors-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
