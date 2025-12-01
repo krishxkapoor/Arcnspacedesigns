@@ -22,6 +22,9 @@ backend/.env
 *.log
 backend_*.log
 
+# Generated files
+generated_valuations/
+
 # Node modules (if any in root)
 node_modules/
 

@@ -66,11 +66,15 @@ class BillBase(BaseModel):
     note: str
 
 class BillCreate(BillBase):
-    pass
+    payment_status: Optional[Literal['pending', 'paid', 'partial']] = 'pending'
+    amount_paid: Optional[float] = 0.0
 
 class Bill(BillBase):
     id: str
     created_at: str
+    payment_status: str
+    amount_paid: float
+    payment_history: Optional[List[dict]] = []
 
     class Config:
         orm_mode = True

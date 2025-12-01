@@ -57,6 +57,9 @@ class Bill(Base):
     amount = Column(Float)
     date = Column(String)
     note = Column(String)
+    payment_status = Column(String, default='pending')  # 'pending', 'paid', 'partial'
+    amount_paid = Column(Float, default=0.0)
+    payment_history = Column(JSON, default=list)  # List of payment records
     created_at = Column(String, default=lambda: datetime.utcnow().isoformat())
 
 class Transaction(Base):

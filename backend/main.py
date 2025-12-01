@@ -6,15 +6,21 @@ from .database import engine, Base
 app = FastAPI()
 
 # CORS configuration
-origins = [
-    "http://localhost:5173",  # Vite default port
-    "http://localhost:3000",
-    "http://localhost:8080",
-    "http://localhost:8082",  # Vanilla JS frontend
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:8082",  # Vanilla JS frontend
-]
+import os
+
+# Allow all origins in production, specific origins in development
+if os.getenv("ENVIRONMENT") == "production":
+    origins = ["*"]
+else:
+    origins = [
+        "http://localhost:5173",  # Vite default port
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://localhost:8082",  # Vanilla JS frontend
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:8082",  # Vanilla JS frontend
+    ]
 
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
