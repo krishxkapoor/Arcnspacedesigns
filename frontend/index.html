@@ -209,7 +209,7 @@
 
         // Load initial page
         const initialPage = window.location.hash.slice(1) || 'dashboard';
-        loadPage(initialPage);
+        setTimeout(() => loadPage(initialPage), 100);
     </script>
 </body>
 

@@ -1,11 +1,11 @@
 // API Client - Fetch-based wrapper for backend communication
 
 // Automatically detect environment
-// In production, use relative URL (same domain) or set VITE_API_URL environment variable
+// In production, use the production backend URL
 // In development, use localhost
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
-    : (import.meta?.env?.VITE_API_URL || 'https://arcnspacedesigns-backend.onrender.com');
+    : 'https://arcnspacedesigns-backend.onrender.com';
 
 class APIClient {
     async get(endpoint) {
@@ -63,4 +63,4 @@ class APIClient {
     }
 }
 
-const api = new APIClient();
+window.api = new APIClient();
