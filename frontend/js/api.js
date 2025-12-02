@@ -3,9 +3,13 @@
 // Automatically detect environment
 // In production, use the production backend URL
 // In development, use localhost
+// TODO: REPLACE THIS WITH YOUR ACTUAL RENDER BACKEND URL AFTER DEPLOYMENT
+// Example: https://arcnspacedesigns-backend-xp3z.onrender.com
+const PRODUCTION_API_URL = 'https://arcnspacedesigns-backend.onrender.com';
+
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
-    : 'https://arcnspacedesigns-backend.onrender.com';
+    : PRODUCTION_API_URL;
 
 class APIClient {
     async get(endpoint) {
