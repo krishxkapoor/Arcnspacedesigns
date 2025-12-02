@@ -1,6 +1,9 @@
 @echo off
 echo Starting Arcnspacedesigns System...
 
+:: Navigate to project root
+cd ..
+
 :: Start Backend
 start "Backend API" cmd /k "call .venv\Scripts\activate && uvicorn backend.main:app --reload"
 

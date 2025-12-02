@@ -22,8 +22,8 @@ router = APIRouter(
     tags=["valuation-templates"],
 )
 
-TEMPLATES_DIR = "templates"
-OUTPUT_DIR = "generated_valuations"
+TEMPLATES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "templates")
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "generated_valuations")
 
 # Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
