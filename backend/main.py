@@ -55,6 +55,24 @@ async def startup():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok"}
+
+# Serve static files (CSS, JS, Images)
+# Mount the entire frontend directory to /static
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+
+# Ensure we can find the frontend directory regardless of where the script is run
+# Assuming running from root, 'frontend' is correct. 
+# If running from backend dir, we might need '../frontend'
+# But for Render with root dir set to '.', 'frontend' is correct.
+if os.path.exists("frontend"):
+    app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+# Serve index.html on root
 @app.get("/")
-async def root():
-    return {"message": "Welcome to Archiva Studio API"}
+async def serve_index():
+    return FileResponse("frontend/index.html")
