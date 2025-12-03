@@ -130,9 +130,11 @@ async function fetchBills() {
 
 function renderBills() {
   const listContainer = document.getElementById('bills-list');
+  if (!listContainer) return;
+
   const summaryContainer = document.getElementById('bills-summary');
-  const filterMonth = document.getElementById('bills-filter-month').value;
-  const filterYear = document.getElementById('bills-filter-year').value;
+  const filterMonth = document.getElementById('bills-filter-month')?.value || '';
+  const filterYear = document.getElementById('bills-filter-year')?.value || '';
 
   let filteredData = billsData;
 

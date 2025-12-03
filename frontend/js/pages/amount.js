@@ -115,9 +115,11 @@ async function fetchTransactions() {
 
 function renderTransactions() {
   const listContainer = document.getElementById('transactions-list');
+  if (!listContainer) return;
+
   const summaryContainer = document.getElementById('transactions-summary');
-  const filterMonth = document.getElementById('amount-filter-month').value;
-  const filterYear = document.getElementById('amount-filter-year').value;
+  const filterMonth = document.getElementById('amount-filter-month')?.value || '';
+  const filterYear = document.getElementById('amount-filter-year')?.value || '';
 
   let filteredData = transactionsData;
 

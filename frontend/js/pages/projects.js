@@ -100,12 +100,14 @@ async function fetchProjects() {
 
 function renderProjects() {
   const listContainer = document.getElementById('projects-list');
-  const searchQuery = document.getElementById('projects-search')?.value.toLowerCase() || '';
-  const filterMonth = document.getElementById('projects-filter-month').value;
-  const filterYear = document.getElementById('projects-filter-year').value;
+  if (!listContainer) return;
 
-  let filteredData = projectsData.filter(p => 
-    p.name.toLowerCase().includes(searchQuery) || 
+  const searchQuery = document.getElementById('projects-search')?.value.toLowerCase() || '';
+  const filterMonth = document.getElementById('projects-filter-month')?.value || '';
+  const filterYear = document.getElementById('projects-filter-year')?.value || '';
+
+  let filteredData = projectsData.filter(p =>
+    p.name.toLowerCase().includes(searchQuery) ||
     (p.location && p.location.toLowerCase().includes(searchQuery))
   );
 

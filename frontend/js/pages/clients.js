@@ -106,9 +106,11 @@ async function fetchClients() {
 
 function renderClients() {
   const listContainer = document.getElementById('clients-list');
+  if (!listContainer) return;
+
   const searchQuery = document.getElementById('client-search')?.value.toLowerCase() || '';
-  const filterMonth = document.getElementById('clients-filter-month').value;
-  const filterYear = document.getElementById('clients-filter-year').value;
+  const filterMonth = document.getElementById('clients-filter-month')?.value || '';
+  const filterYear = document.getElementById('clients-filter-year')?.value || '';
 
   let filteredClients = clientsData.filter(client =>
     client.name.toLowerCase().includes(searchQuery) ||

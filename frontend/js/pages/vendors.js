@@ -129,10 +129,12 @@ async function fetchVendors() {
 
 function renderVendors() {
   const listContainer = document.getElementById('vendors-list');
+  if (!listContainer) return;
+
   const categoryFilter = document.getElementById('category-filter')?.value || '';
   const searchQuery = document.getElementById('vendors-search')?.value.toLowerCase() || '';
-  const filterMonth = document.getElementById('vendors-filter-month').value;
-  const filterYear = document.getElementById('vendors-filter-year').value;
+  const filterMonth = document.getElementById('vendors-filter-month')?.value || '';
+  const filterYear = document.getElementById('vendors-filter-year')?.value || '';
 
   let filteredVendors = vendorsData.filter(v =>
     (v.name.toLowerCase().includes(searchQuery) ||
