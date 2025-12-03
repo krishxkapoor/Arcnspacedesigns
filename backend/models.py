@@ -33,6 +33,7 @@ class Project(Base):
 
     id = Column(String, primary_key=True, default=generate_uuid)
     name = Column(String, nullable=False)
+    location = Column(String)
     created_at = Column(String, default=lambda: datetime.utcnow().isoformat())
 
     transactions = relationship("ProjectTransaction", back_populates="project", cascade="all, delete-orphan")

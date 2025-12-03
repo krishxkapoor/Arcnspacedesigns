@@ -62,6 +62,12 @@ async function loadProjects(container) {
             </select>
           </div>
         </div>
+        <div class="mb-4 relative">
+          <svg class="absolute left-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input type="text" id="projects-search" placeholder="Search by name or location..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
         <div id="projects-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <!-- Projects will be loaded here -->
         </div>
@@ -70,6 +76,7 @@ async function loadProjects(container) {
   `;
 
   document.getElementById('add-project-form').addEventListener('submit', handleAddProject);
+  document.getElementById('projects-search').addEventListener('input', renderProjects);
 
   // Set current month/year as default
   const today = new Date();
@@ -93,10 +100,14 @@ async function fetchProjects() {
 
 function renderProjects() {
   const listContainer = document.getElementById('projects-list');
+  const searchQuery = document.getElementById('projects-search')?.value.toLowerCase() || '';
   const filterMonth = document.getElementById('projects-filter-month').value;
   const filterYear = document.getElementById('projects-filter-year').value;
 
-  let filteredData = projectsData;
+  let filteredData = projectsData.filter(p => 
+    p.name.toLowerCase().includes(searchQuery) || 
+    (p.location && p.location.toLowerCase().includes(searchQuery))
+  );
 
   if (filterMonth !== '' && filterYear !== '') {
     filteredData = projectsData.filter(p => {

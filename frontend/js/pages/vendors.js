@@ -67,7 +67,34 @@ async function loadVendors(container) {
               <option value="hardware">Hardware</option>
               <option value="other">Other</option>
             </select>
+            <select id="vendors-filter-month" class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none" onchange="renderVendors()">
+              <option value="">All Months</option>
+              <option value="0">January</option>
+              <option value="1">February</option>
+              <option value="2">March</option>
+              <option value="3">April</option>
+              <option value="4">May</option>
+              <option value="5">June</option>
+              <option value="6">July</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">October</option>
+              <option value="10">November</option>
+              <option value="11">December</option>
+            </select>
+            <select id="vendors-filter-year" class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none" onchange="renderVendors()">
+              <option value="">All Years</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+            </select>
           </div>
+        </div>
+        <div class="mb-4 relative">
+          <svg class="absolute left-3 top-3 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input type="text" id="vendors-search" placeholder="Search by name, phone or category..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         </div>
         <div id="vendors-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <!-- Vendors will be loaded here -->
@@ -78,6 +105,7 @@ async function loadVendors(container) {
 
   document.getElementById('add-vendor-form').addEventListener('submit', handleAddVendor);
   document.getElementById('category-filter').addEventListener('change', renderVendors);
+  document.getElementById('vendors-search').addEventListener('input', renderVendors);
 
   // Set current month/year as default
   const today = new Date();
@@ -102,12 +130,16 @@ async function fetchVendors() {
 function renderVendors() {
   const listContainer = document.getElementById('vendors-list');
   const categoryFilter = document.getElementById('category-filter')?.value || '';
+  const searchQuery = document.getElementById('vendors-search')?.value.toLowerCase() || '';
   const filterMonth = document.getElementById('vendors-filter-month').value;
   const filterYear = document.getElementById('vendors-filter-year').value;
 
-  let filteredVendors = categoryFilter
-    ? vendorsData.filter(v => v.category === categoryFilter)
-    : vendorsData;
+  let filteredVendors = vendorsData.filter(v =>
+    (v.name.toLowerCase().includes(searchQuery) ||
+      v.phone.includes(searchQuery) ||
+      v.category.toLowerCase().includes(searchQuery)) &&
+    (categoryFilter === '' || v.category === categoryFilter)
+  );
 
   if (filterMonth !== '' && filterYear !== '') {
     filteredVendors = filteredVendors.filter(v => {

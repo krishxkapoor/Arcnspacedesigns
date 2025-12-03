@@ -47,6 +47,7 @@ class ProjectTransaction(ProjectTransactionBase):
 
 class ProjectBase(BaseModel):
     name: str
+    location: Optional[str] = None
 
 class ProjectCreate(ProjectBase):
     pass
